@@ -34,20 +34,10 @@ class YiiDebug extends CComponent
                 echo "\n";
             }
             return;
-        } else if (empty($_SERVER['SERVER_ADDR']) || empty($_SERVER['REMOTE_ADDR']) || $_SERVER['SERVER_ADDR'] !== $_SERVER['REMOTE_ADDR']) {
-            return;
-        }
-
-        $backTrace = debug_backtrace();
-        $backTrace = array_shift($backTrace);
-        echo '<div style="margin: 10px;border: 1px solid red;padding: 10px; background: #fff;">';
-        if (is_array($backTrace) && isset($backTrace['file']) && isset($backTrace['function']) && $backTrace['function'] === __FUNCTION__) {
-            echo "<b>{$backTrace['file']}</b> in line <b>{$backTrace['line']}</b> <br />";
-            echo '<div style="border-bottom:1px solid #006699;margin: 5px 0;"></div>';
         }
 
         foreach ($args as $k => $var) {
-            echo CVarDumper::dump($var, 10, true), '<br />';
+            echo CVarDumper::dump($var, 2, false), '<br />';
         }
 
         echo "</div>";
